@@ -176,7 +176,7 @@ week_order=[]
     
     table1 = pd.pivot_table(data=df,index='week',values='revenue',aggfunc=np.sum)
     week_df=table1.reset_index()
-    week=week_df['week].value.tolist()
+    week=week_df['week].values.tolist()
     week_order=week_df['revenue'].values.tolist()
     
 
