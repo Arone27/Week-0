@@ -152,18 +152,11 @@ c=0
 k=1
 for i in range(1,(df['week'].max()//4)+2) :   #counting no of months
                month.append(i)
-for i in range(1,(df['week'].max()//4)+2) :
-    for idx in range(c,(df['week'].count()+1)) :   #adding the revenues 
-        if(df.at(idx,'month')<=k) :
-               s=s+df.at[idx,"Revenue"]
-        else :
-             c=idx
-             k++
-             break
-    month_order.append(s)
-    s=0
     
-
+table1 = pd.pivot_table(data=df,index='month',values='revenue',aggfunc=np.sum)
+month_df=table1.reset_index()
+for i in range(1,(df['week'].max()//4)+2):
+     month_order.append(df.loc[df['month']<=i,'revenue'].sum())
     
 '''*********************************************************************'''
 '''Here we have created two list week and week_order ,you need to store in them mapping the monthly orders'''    
@@ -174,8 +167,8 @@ week_order=[]
 '''***********************************Your code***********************'''
 
     
-    table1 = pd.pivot_table(data=df,index='week',values='revenue',aggfunc=np.sum)
-    week_df=table1.reset_index()
+    table2 = pd.pivot_table(data=df,index='week',values='revenue',aggfunc=np.sum)
+    week_df=table2.reset_index()
     week=week_df['week].values.tolist()
     week_order=week_df['revenue'].values.tolist()
     
