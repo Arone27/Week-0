@@ -172,19 +172,12 @@ week=[]
 week_order=[] 
 
 '''***********************************Your code***********************'''
-s=0
-c=0
-for i in range(1,(df['week'].max()+1) :    #counting weeks
-    week.append(i)
-for i in range(1,(df['week'].max()+1) :
-    for idx in range(c,(df['week'].count()+1)) :
-        if((df.at(idx,"week"))=i) :
-               s=s+df.at[idx,"Revenue"]             # adding weekly revenue
-        else :
-               c=idx
-               break
-    week_order.append(s)
-    s=0
+
+    
+    table1 = pd.pivot_table(data=df,index='week',values='revenue',aggfunc=np.sum)
+    week_df=table1.reset_index()
+    week=week_df['week].value.tolist()
+    week_order=week_df['revenue'].values.tolist()
     
 
 '''*********************************************************************'''
